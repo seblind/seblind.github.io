@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Social Graphs - Project Part B</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- D3 js library for visualizations -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body id="page-top" class="index">
+
+    <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+    <!-- Navigation in top-->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+
+            <div class="navbar-header page-scroll">
+                <!-- Menu for better small screen display -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">02805 - Project Part B</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#intro">Introduction</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#data">Data</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#graph">Graphs</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#nlp">NLP</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#conclusion">Conclusion</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+</style>
+    <div class="container" id="maincontent" tabindex="-1" style="background:url('img/back01.jpg'); width:100%">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-text">
+                    <hr class="line-light">
+                    <h1 class="name">Final Project - Part B</h1>
+                    <span class="skills">02805 - Social Graphs E19</span>
+                    <hr class="line-light">
+                    <p>An analysis of user reviews on IMDb</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="intro"> 
+    <div class="container visualizations">
+        <div class="row text-left">
+            <div class="col-lg-12 text-center">
+                <h2>Introduction</h2>
+                <hr class="line-primary">
+            </div>
+        <div class="col-lg-2 "></div>
+            <div class="col-lg-8 ">
+                <p>
+                    On this site you will find a series of analysis of user
+                    generated data on the popular movie database site known
+                    as The Internet Movie Database.
+                </p>
+                <p>
+                In the first part of the site we will be looking at basic
+                statistics of the datasets we have chosen. The following parts
+                will be an analysis on relations between a subset of the
+                available titles using graph theory, followed by an analysis
+                of the written reviews contributed by users of the site.
+                </p></br>
+                <div class="text-center ">
+                    <h4>Why this dataset</h4>
+                </div>
+                <p>
+                We chose to work with movie related data
+                because we both enjoy watching movies and tv shows and are
+                often influenced by opinions found on sites like IMDb, Rotten
+                Tomatoes and so on when we are looking for new stuff to watch.
+                We especially find user generated data on these kind of sites
+                interesting, as so far we think that they correspond more
+                closely to our own opinion than the opinion of the professional
+                critics. For this reason we wanted to gain more insight in the
+                properties of the data that people tend to generate on such
+                sites.
+                </p>
+                </br>
+                </br>
+            </div>  
+        </div>
+    </div>
+</section>
+
+<section id="data"> 
+    <div class="container visualizations">
+        <div class="row text-left">
+            <div class="col-lg-12 text-center">
+                <h2>Collecting Data</h2>
+                <hr class="line-primary">
+            </div>
+        <div class="col-lg-2 "></div>
+            <div class="col-lg-8 ">
+                <p>
+                    The data we have worked with all stem from
+                    <a href="imdb-link">IMDbs set of datasets</a>
+                    sprinkled with a database of user reviews that we scraped
+                    ourselves with a custom built web scraper. With the scraper
+                    we created, we managed to scrape 2.2 gigabytes of text data
+                    off the IMDb reviews page. The scraped reviews amount to
+                    1654523 user reviews consising of 381651374 words in total.
+                    This means that a review consists of 230 words on average.
+
+                    The explainer notebook found at the root of this git
+                    repository contains all of the analysis, the methods used
+                    for scraping the data and the methods used for processing
+                    the data. SUPPLY A LINK TO NBVIEWER HERE PLS
+
+                    The review data that we scraped is available in the
+                    <em><strong>reviews/</strong></em>
+                    directory at the root of the git
+                    repository as tab separated files for anyone interested.
+                </p>
+                <p>
+                    The main IMDb dataset consists of approximately 6.1 million
+                    rows where each row corresponds to a movie, tv show episode
+                    etc. A dataset consisting of ratings and number of user
+                    vores were merged into the base dataset, as we wanted to
+                    use the number of user ratings for targeting the titles we
+                    scraped reviews for. This decision was based on the idea
+                    that titles that had many user ratings were likely to also
+                    have many user written reviews.
+                </p>
+                <p>
+                We decided to reduce the size of the data set by
+                picking the top 3000 titles sorted by the number of user votes.
+                </p>
+            <div class="text-center">
+                <h3>Distribution of number of votes</h3>
+                <img src="imgs/numvotes_hist.png" class="img-fluid" alt="Responsive image">
+            </div>
+            </br>
+            </br>
+            <p>
+            The number of user votes range from approximately 60.000 to 2.160.000
+            votes in for the selected 3000 titles,  with a mean number of votes
+            of approximately 200.000. From the plot above it is clear that only
+            very few titles have received 500.000 user votes.
+            </p>
+            </br>
+            <div class="text-center">
+                <h3>Distribution of genres</h3>
+            </br>
+                <img src="imgs/genres_bars.png" class="img-fluid" alt="Responsive image">
+            </div>
+            <p>
+            </br>
+            The dataset has a field to specify which genres a title belongs to.
+            A single title may belong to one or more genres, and it is clear
+            from the plot above that the Drama genre is dominating the picture,
+            followed by the common Action and Comedy genres. In the analysis
+            you'll find on this page we rely heavily on the genre field for
+            grouping the data.
+            </p>
+            </br>
+            <div class="text-center">
+                <h3>Average of all user ratings</h3>
+                <img src="imgs/avgrating_hist.png" class="img-fluid" alt="Responsive image">
+            </div>
+            <p>
+            </br>
+            The average rating of movies is pretty high considering that a rating
+            of 1 is the lowest you can get. The data used to generate the plot
+            above has a mean of 7, with the values lying in the interval
+            [1.4;10.0].
+            </p>
+            </br>
+            <div class="text-center">
+                <h3>User rating distribution from written reviews</h3>
+                <img src="imgs/user_ratings.png" class="img-fluid" alt="Responsive image">
+            </div>
+            </br>
+            <p>
+            It is also interesting to see how people tend to use the rating system.
+            People either really dislike a title by giving it a rating of 1, or
+            really like a title by giving it a rating of 10.
+            </p>
+            </br>
+            <div class="text-center">
+                <h4>Preparing the text</h4>
+            </div>
+            </br>
+                <p>
+                    Before the data can be used with the text analysis methods,
+                    some pre-processing is necessary. Natural language contains
+                    unimportant words with little meaning and punctuation which
+                    we remove before further processing. In short the process
+                    is the following:
+                </p>
+                </br>
+                <ol>
+                    <li>
+                       Convert the text to lower case to ensure that two
+                       instances of the same word in different cases is
+                       seen as the same word, and not different words.
+                    </li>
+
+                    <li>
+                        Ensure special symbols are translated correctly
+                    </li>
+
+                    <li>
+                        Remove hyperlinks, punctuation and numbers from the text.
+                    </li>
+                    <li>
+                        The text is then tokenized by splitting it into words
+                        at every space.
+                    </li>
+                    <li>
+                        At last so-called stop words (words of little
+                        importance) are removed.
+                    </li>
+                </br>
+
+               </br>
+                </br>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="graph">
+    <div class="container visualizations">
+        <div class="row text-left">
+            <div class="col-lg-12 text-center">
+                <h2>Graph stuff</h2>
+                <hr class="line-primary">
+            </div>
+        <div class="col-lg-2 "></div>
+            <div class="col-lg-8 ">
+                <p>
+                    With the amount of data harvested it can be useful to visualize
+                    it as a network of relations between entities. For our network
+                    we wanted to map out how reviewers might have the tendency to
+                    review more movies of one set of genres according to personal
+                    preference.
+                </p>
+                <p>
+                    The influence of a movie database like <a href="imdb-link">IMDB</a>
+                    is hard to neglect. For many, including ourselves, it is a
+                    deciding factor if a movie is worth watching. And one
+                    could imagine that some genres/franchises are considered as
+                    more crowdpleasing (liked by a larger audience) than others.
+                    Therefore we found it interesting to investigate it.
+                </p>
+                <p>
+                    To visiualize this we looked at every user who wrote more than
+                    a single review and transfered this to the notion of a network where
+                    all the reviews made this user is connected to one another and the dots
+                    connecting them are the movies reviewed.
+                </p>
+                <p>
+                    If another user has written reviews of the same titles as someone else,
+                    then the existing link between the titles are increased in its importance by
+                    increasing what is known as its 'weight'.
+                    This occurrence does not require the exact same set of reviews among users,
+                    but as long as at least two reviews of the same titles exists, the existing
+                    link is increased in weight.
+                </p>
+                <div class="text-center">
+                    <h3>The network of reviews</h3>
+                    <img src="imgs/G_full.png" class="img-fluid" alt="Responsive image">
+                </div>
+            <div class="row text-left">
+                <p>
+                    The network seen above is the result of an overwhelming amount of data
+                    that is too losely structered. The different weights of links are visualized
+                    here as the ones increasing the node sizes. Essentially, the more some set
+                    of movies are reviewed by users, the larger they appear in the network.
+                </p>
+                <p>
+                    If the network looks overwhelming and hard to gather anything meaningful from,
+                    it's because it is. In this network the full dataset was mapped which is
+                    actually 3000 titles connected to one another by over 4 million links.
+                    We had to make the links extremely narrow to even visualize it without it
+                    looking like a big black sphere.
+                </p>
+            </div>
+            <div class="text-center">
+                <h3>Zooming in</h3>
+                <img src="imgs/G_reduced.png" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="row text-left">
+                <p>
+                    Narrowing down a little, the network above is showing what a network
+                    of reviews looks like when the links between titles are required to have
+                    a weight attribute of at least 200. Meaning that some user has to have
+                    reviewed some titles that at least 200 other users also have reviewed.
+                </p>
+                <p>
+                    It is our hypothesis that this exclusion of large parts of the network
+                    will increase the possibility of communities to arise. Here we are
+                    probably looking at a network showing the most reviewed or popular titles
+                </p>
+                <p>
+                    As with the network of all reviews, nodes are scaled again by their significance.
+                    It is now much easier to spot that some titles are much more reviewed than others.
+                    This network consists of 328 titles connected by 1256 mutual reviews.
+                </p>
+            </div>
+            <div class="text-center">
+                <h4>Distributions</h4>
+            </div>
+            </br>
+            <div class="row text-left">
+                <img src="imgs/degree_dist_full.png" class="rounded float-left" alt="img-thumbnail">
+                <img src="imgs/degree_dist_reduced.png" class="rounded float-right" alt="img-thumbnail">
+                <p>
+                   The figures shown here are histograms of the links per nodes. The figure of blue
+                   color is the entire network. We can see that very large portion of the network is
+                   clustered close to the 3000 mark, meaning that connectedness of this network
+                   is extremely high. This is due the way the network is created initially, where
+                   all sets of user reviews are essentially mapped as complete graphs, which are then connected
+                   to one another for the mutual titles of the sets. 
+                </p>
+                <p>
+                    When the smaller network is considerd, here shown in green, the extreme connectedness
+                    is lost and only few titles can be interpreted as highly reviewed due to the new
+                    relations.
+                </p>
+            </div>
+            </br>
+            <div class="text-center">
+                <h3>Communities</h3>
+                <h5>Large network</h5>
+            </div>
+            </br>
+            <div class="row text-left">
+                <p>
+                    To aid us in searching for potential communities in the two networks we used an
+                    algorithm known as the the <a href="https://sites.google.com/site/findcommunities/">Louvain Method</a>
+                    which we had used previously in the course. This algorithm tries to partition
+                    the network into several smaller communities with a high connectedness among their
+                    internal nodes and a low connectedness to the rest of the network. Therefore,
+                    it is should be no surprise that the super connected network of all reviews
+                    will have a hard time getting partitioned.
+                </p>
+                </br>
+                <p>
+                    Let us apply the Louvain algorithm to our networks and see what happens!
+                </p>
+            </div>
+            <div class="text-center">
+                <img src="imgs/communities_full.png" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="row text-left">
+                <p>
+                    To begin with, we get the (unfortunately) not so interesting network out of the
+                    way. The network is partitioned into 3 communities that are hard to seperate visually,
+                    but not only to the naked eye is it troublesome to spot the difference between
+                    them, the Louvain algorithm also has difficulties as revealed by its
+                    <i>scoring</i> of the partitioning it made. This score is called
+                    modularity. It is a well known limitation of modularity based partitioning that
+                    a network consisting of nodes with very high degrees (like this one), that it will have
+                    problems finding communities. We can compare the findings listed here, to the
+                    reduced network.
+                </p>
+            </br>
+                <table class="table">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th scope="col">Communities count</th>
+                          <th scope="col">Modularity score</th>
+                          <th scope="col">Size distribution</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>3</td>
+                      <td>0.11756658</td>
+                      <td>1213, 564, 1223</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+            <p>
+                When the modularity score reaches 0 we have a case of a single community. Luckily it
+                still manages to partition the network into 3 communities, albeit in a suboptimal
+                manner where distinguishing them in terms of seperate clusters will be hard.
+                Let us keep the values of the little table in mind when moving to the next network.
+            </p>
+            </div>
+            </br>
+            <div class="text-center">
+                <h5>Reduced network</h5>
+                <img src="imgs/communities_reduced.png" class="img-fluid" alt="Responsive image">
+            </div>
+            </br>
+            <p>
+                Here we have a completely different scenario, communities are forming and it is
+                apparent to the naked eye - by applying a color code to each community.
+                So now we see how there are some communities that are quite dominant and their
+                internal connectedness is also substantial in terms of visibility. Larger communities
+                are still a connected component of the network but there a now also smaller cliques
+                completely detached from the network. It could be fun to see if something sets them apart
+                of if it is a coincidence.
+            </p>
+
+            <div class="text-left">
+                <table class="table">
+                  <thead class="thead-light">
+                      <th scope="col">Communities count</th>
+                      <th scope="col">Modularity score</th>
+                      <th scope="col">Size distribution</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>16</td>
+                      <td>0.63965393</td>
+                      <td>18, 81, 61, 4, 61, 2, 3, 2, 2, 31, 47, 8, 2, 2, 2, 2</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </br>
+                </br>
+                <p>
+                    From the table we can collect that a total of 16 communities were partitioned
+                    and with a modularity approaching 0.64 it is quite well partitioned. From the
+                    size distributions it is worth noting that most smaller communities and 5-6
+                    larger depending on the interpretation.
+                </p>
+                </br>
+                <p>
+                    As a tool of better understanding what we are looking at and how it got there,
+                    let us try and compare the communities by mapping them on to the different genres
+                    of the titles forming them.
+                </p>
+                </br>
+            </div>
+            <div class="text-center">
+                <h4>Genre Heatmaps</h4>
+            </div>
+            </br>
+            <div class="text-left">
+                <p>
+                    In the heatmap generated the following table describes the relationship
+                    between genres and the number found on the x-axis.
+                </p>
+                <table class="table">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th scope="col">Genre</th>
+                          <th scope="col">x-axis</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <th scope="row">Western</th>
+                          <td>0</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Biography</th>
+                          <td>1</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Crime</th>
+                          <td>2</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Animation</th>
+                          <td>3</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Adventure</th>
+                          <td>4</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Sci-Fi</th>
+                          <td>5</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Family</th>
+                          <td>6</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Thriller</th>
+                          <td>7</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">War</th>
+                          <td>8</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Romance</th>
+                          <td>9</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Mystery</th>
+                          <td>10</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Horror</th>
+                          <td>11</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Music</th>
+                          <td>12</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Action</th>
+                          <td>13</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Drama</th>
+                          <td>14</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Comedy</th>
+                          <td>15</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Fantasy</th>
+                          <td>16</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">History</th>
+                          <td>17</td>
+                      </tr>
+                      <tr>
+                      <th scope="row">Musical</th>
+                          <td>18</td>
+                      </tr>
+                  </tbody>
+                </table>
+            </div>
+            </br>
+            <p>
+                And the heatmap representing the reduced network:
+            </p>
+            <div class="text-center">
+                <img src="imgs/heatmap_reduced.png" class="img-fluid" alt="Responsive image">
+            </div>
+            <p>
+                We see that a few genres are dominiant in all of
+                the major communities but there is one interesting
+                community that sticks out quite a lot, community
+                number 5. Which interestingly enough are the genres
+                Mystery and Horror. The larger communities are very
+                alike in terms of genres where they form different
+                combinations of the genres: Adventure, Sci-Fi and
+                Drama, Action.
+
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="nlp"> 
+    <div class="container visualizations">
+        <div class="row text-left">
+            <div class="col-lg-12 text-center">
+                <h2>Natural Language Processing</h2>
+                <hr class="line-primary">
+            </div>
+        <div class="col-lg-2 "></div>
+            <div class="col-lg-8 ">
+                <p>
+                    To gain insight in what terms generally characterize a
+                    genre, we use the <em>term frequency-inverse document frequency</em>
+                    metric to identify such terms, and visualize them using
+                    a word cloud. Word clouds enable people to quickly see which
+                    terms are the most important.
+                </p>
+            <div class="text-center">
+                <h3>An example of word clouds without TF-IDF</h3>
+                <img src="imgs/4clouds.png" class="img-fluid" alt="Responsive image">
+            </div></br>
+            <p>
+            It is clear from the word clouds above that in order to get anything
+            meaningful out of the clouds, we need some way of scaling down words
+            like 'movie', 'film' and 'one', as these don't aid us in telling the
+            titles apart. By applying TF-IDF to the set of review texts and by
+            choosing a suitable term frequency metric, we achieved a higher
+            degree of uniqueness between the highlighted terms in the word clouds.
+            What follows is 24 word clouds created, each one generated by
+            including all reviews in a genre and applying the TF-IDF metric to
+            scale the terms accordingly.
+
+            <div class="text-center">
+                <h3>Word clouds by genre</h3>
+                <img src="imgs/allclouds.png" class="img-fluid" alt="Responsive image">
+            </div></br>
+            <p>
+            It is now easier to deduce what you might expect to find amongst
+            the various genres by looking at the word clouds. For example in the
+            News genre we see words like Gore, emissions and dioxide so people
+            reviewing titles in this genre probably often mention Al Gore in
+            relation to titles concering pollution and the environment, where
+            the Animation reviews are dominated by the terms 'Disney' and 'Pixar.
+            </p>
+            <div class="text-center">
+                <h3>Sentiment</h3>
+                <img src="imgs/sentiment_score.png" class="img-fluid" alt="Responsive image">
+            </div>
+
+                </br>
+                </br>
+            </div>  
+        </div>
+    </div>
+</section>
+
+
+
+
+<section id="conclusion"> 
+    <div class="container visualizations">
+        <div class="row text-left">
+            <div class="col-lg-12 text-center">
+                <h2>Conclusion</h2>
+                <hr class="line-primary">
+            </div>
+        <div class="col-lg-2 "></div>
+            <div class="col-lg-8 ">
+                
+                <p>
+                </p>
+                <div class="text-center ">
+                    conclude
+                </div>
+                </br>
+                </br>
+            </div>  
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer class="text-center">
+	<div class="footer-below">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					Copyright &copy; ArpeStilling 2017-2019
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+<!-- Theme JavaScript plus add small useful JS functions -->
+<script src="js/custom.js"></script>
+
+<!-- add the plot scripts to the website -->
+
+
+</body>
+</html>
